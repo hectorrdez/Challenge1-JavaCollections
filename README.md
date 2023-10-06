@@ -1,6 +1,6 @@
-# ArrayList
+## ArrayList
 
-a) Definición y creación de una colección
+### a) Definición y creación de una colección
 Definición:
 ArrayList en Java es una implementación de la interfaz List que utiliza un arreglo dinámico para almacenar elementos. Proporciona métodos para manipular elementos dinámicamente.
 
@@ -18,7 +18,7 @@ ArrayList<String> B = new ArrayList<>();
 ArrayList<String> A = new ArrayList<>(B);  // A = B
 ```
 
-b) Metodos/Propiedades Generales
+### b) Metodos/Propiedades Generales
 
 **Tamaño**
 ```java
@@ -46,7 +46,7 @@ A.add("A"); // A = {"A"}
 String elementoA = A.get(0); // Devolverá "A"
 ```
 
-c) Añadir Datos a la Colección
+### c) Añadir Datos a la Colección
 
 **Añadir Elementos desde el Constructor**
 ```java
@@ -71,4 +71,4 @@ A.add("A") // A = {"A"}
 ArrayList<ArrayList<String>> B = new ArrayList<>();
 B.add(A) // B = {{"A"}}
 ```
-# HashMap
+## HashMap
