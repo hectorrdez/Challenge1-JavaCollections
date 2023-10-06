@@ -1,7 +1,30 @@
-## ArrayList
+## Indice <a name="indice"></a>
 
-### a) Definición y creación de una colección
-Definición:
+1. [ArrayList](#arraylist)
+    
+    1.1 [Definición](#arraylist-def)
+
+    1.2 [Metodos](#arraylist-metpropgen)
+
+    1.3 [Añadir](#arraylist-add)
+
+    1.4 [Eliminar](#arraylist-del)
+    
+    1.5 [Recorrer](#arraylist-travel)
+
+    1.6 [Find](#arraylist-find)
+
+    1.7 [Ordenar](#arraylist-order)
+    
+    1.8 [Otro](#arraylist-other)
+
+2. [HashMap](#hashmap)
+
+## 1. ArrayList <a name="arraylist"></a>
+
+[Volver al indice](#indice)
+
+### 1.1 Definición y creación de una colección <a name="arraylist-def"></a>
 ArrayList en Java es una implementación de la interfaz List que utiliza un arreglo dinámico para almacenar elementos. Proporciona métodos para manipular elementos dinámicamente.
 
 **Constructores utiles**
@@ -18,7 +41,9 @@ ArrayList<String> B = new ArrayList<>();
 ArrayList<String> A = new ArrayList<>(B);  // A = B
 ```
 
-### b) Metodos/Propiedades Generales
+[Volver al indice](#indice)
+
+### 1.2 Metodos/Propiedades Generales <a name="arraylist-metpropgen"></a>
 
 **Tamaño**
 ```java
@@ -38,7 +63,6 @@ int tamanoB = B.size(); // --> tamanoB = 2
 ***
 **Acceso por índice/Clave**
 ```java
-// El acceso por índice nos permite crear 
 ArrayList<String> A = new ArrayList<>();
 A.add("A"); // A = {"A"}
 
@@ -46,7 +70,9 @@ A.add("A"); // A = {"A"}
 String elementoA = A.get(0); // Devolverá "A"
 ```
 
-### c) Añadir Datos a la Colección
+[Volver al indice](#indice)
+
+### 1.3. Añadir Datos a la Colección <a name="arraylist-add"></a>
 
 **Añadir Elementos desde el Constructor**
 ```java
@@ -71,7 +97,10 @@ A.add("A") // A = {"A"}
 ArrayList<ArrayList<String>> B = new ArrayList<>();
 B.add(A) // B = {{"A"}}
 ```
-### d) Eliminar datos de la Colección
+
+[Volver al indice](#indice)
+
+### 1.4 Eliminar datos de la Colección <a name="arraylist-del"></a>
 
 **Eliminar Elementos Mediante Código**
 ```java
@@ -122,7 +151,9 @@ A.add(7); // A = {1, 3, 5, 7}
 A.removeIf(element -> element > 5) // A = {1, 3}
 ```
 
-### e) Recorrer la Colección
+[Volver al indice](#indice)
+
+### 1.5 Recorrer la Colección <a name="arraylist-travel"></a>
 
 **Recorrer haciendo uso de un for**
 
@@ -187,7 +218,9 @@ A.forEach(elemento -> {
 
 > **Nota importante:** si se realiza alguna modificación sobre la lista o alguno de sus elementos mientras se recorre usando un _foreach_ o usando _Iterator_, se lanzará la una _**ConcurrentModificationException**_.
 
-### f) Búsqueda de Elementos
+[Volver al indice](#indice)
+
+### 1.6 Búsqueda de Elementos <a name="arraylist-find"></a>
 
 **Realizar una búsqueda con un bucle (For/Foreach/Iterator)**
 
@@ -217,13 +250,75 @@ A.add("C"); // A = {"A", "B", "C"}
 boolean encontrado = A.stream().anyMatch(elemento -> elemento.equals("C")); 
 // Devuelve true si hay alguna coincidencia
 ```
+
+> **Nota importante:** el tipo _**Stream**_, al que se convierte el _ArrayList_ permite hacer uso de metodos de programación funcional. En caso de querer retornar un ArrayList una vez se convierte es necesario usar el metodo collect especificando como parametro el tipo a devolver haciendo uso de los metodos estáticos de conversión disponibles en _Collectors_.
+
 ***
 
 **Realizar una búsqueda con Api Stream (Filtrado/Collect)**
 
 ```java
-List<String> subLista = lista.stream().filter(condición).collect(Collectors.toList());
+ArrayList<String> A = new ArrayList<>();
+A.add("A"); // A = {"A"}
+A.add("B"); // A = {"A", "B"}
+A.add("C"); // A = {"A", "B", "C"}
+A.add("A"); // A = {"A", "B", "C", "A"}
 
+List<String> B = A.stream().filter(element -> element.equals("A")).collect(Collectors.toList()); // A = {"A", "A"}
+```
+[Volver al indice](#indice)
+
+### 1.7 Ordenación de elementos <a name="arraylist-order"></a>
+
+**Ordenar haciendo uso de Funciones de Collection**
+
+```java
+ArrayList<String> A = new ArrayList<>();
+A.add("A"); // A = {"A"}
+A.add("C"); // A = {"A", "C"}
+A.add("B"); // A = {"A", "C", "B"}
+A.add("A"); // A = {"A", "C", "B", "A"}
+
+Collections.sort(A); // A = {"A", "A", "B", "C"}
 ```
 
-## HashMap
+***
+
+**Ordenar haciendo uso de Expresiones Lambda**
+
+```java
+ArrayList<Integer> A = new ArrayList<>();
+A.add(1); // A = {1}
+A.add(3); // A = {1, 3}
+A.add(2); // A = {1, 3, 2}
+
+// ArrayList.sort((current, next) -> current.compareTo(b))
+A.sort((a, b) -> a.compareTo(b)); // A = {1, 2, 3}
+```
+
+***
+
+**Ordenar haciendo uso de la API Stream**
+
+```java
+ArrayList<String> A = new ArrayList<>();
+A.add("A"); // A = {"A"}
+A.add("B"); // A = {"A", "B"}
+A.add("C"); // A = {"A", "B", "C"}
+A.add("A"); // A = {"A", "B", "C", "A"}
+
+List<String> B = A.stream().filter(element -> element.equals("A")).collect(Collectors.toList()); // A = {"A", "A"}
+```
+[Volver al indice](#indice)
+ 
+### 1.9 Otros Aspectos<a name="arraylist-other"></a>
+
+- **Uso de Genéricos:** ArrayList en Java utiliza genéricos para asegurar el tipo de elementos almacenados.
+- **Capacidad Dinámica:** ArrayList ajusta automáticamente su capacidad interna según sea necesario.
+- **Eficiencia en Inserciones/Eliminaciones:** Las inserciones y eliminaciones en el medio de la lista pueden ser lentas, ya que requieren desplazar los elementos.
+- **Uso de Métodos Equals y HashCode:** ArrayList utiliza el método equals() para comparar elementos y hashCode() para mejorar el rendimiento en ciertas operaciones.
+- **Sincronización:** _ArrayList_ no es sincronizado, lo que significa que no es seguro para subprocesos. Si es necesario, puedes usar Collections.synchronizedList(lista) para hacerlo sincronizado.
+
+[Volver al indice](#indice)
+
+## HashMap <a name="hashmap"></a>
