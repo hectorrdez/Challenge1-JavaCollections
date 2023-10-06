@@ -134,7 +134,8 @@ A.add("C"); // A = {"A", "B", "C"}
 A.add("D"); // A = {"A", "B", "C", "D"}
 
 for(int i = 0; i < A.size(); i++){
-    System.out.println(A.get(i));
+    String elemento = A.get(i); // Siendo elemento el String devuelto de la colección
+    System.out.println(elemento);
 }
 ```
 
@@ -150,7 +151,7 @@ A.add("C"); // A = {"A", "B", "C"}
 A.add("D"); // A = {"A", "B", "C", "D"}
 
 for(String s : A){
-    System.out.println(s);
+    System.out.println(s); // Siendo s el String devuelto de A
 }
 ```
 
@@ -164,7 +165,7 @@ A.add("C"); // A = {"A", "B", "C"}
 
 Iterator<String> iteratorA = A.iterator(); // Creamos el iterador
 while (iteratorA.hasNext()) {
-    String elemento = iteratorA.next();
+    String elemento = iteratorA.next(); // Siendo elemento el String devuelto de A
     System.out.println(elemento);
 }
 ```
@@ -180,7 +181,7 @@ A.add("B"); // A = {"A", "B"}
 A.add("C"); // A = {"A", "B", "C"}
 
 A.forEach(elemento -> {
-    System.out.println(elemento);
+    System.out.println(elemento); // Siendo elemento el String devuelto de A
 });
 ```
 
@@ -190,6 +191,39 @@ A.forEach(elemento -> {
 
 **Realizar una búsqueda con un bucle (For/Foreach/Iterator)**
 
-```java```
+```java
+ArrayList<String> A = new ArrayList<>();
+A.add("A"); // A = {"A"}
+A.add("B"); // A = {"A", "B"}
+A.add("C"); // A = {"A", "B", "C"}
+
+for(String elemento : A){
+    if(elemento.equals("C")){
+        // Se ha encontrado el elemento
+    }
+}
+```
+
+***
+
+**Realizar una búsqueda con Expresiones Lambda (Stream)**
+
+```java
+ArrayList<String> A = new ArrayList<>();
+A.add("A"); // A = {"A"}
+A.add("B"); // A = {"A", "B"}
+A.add("C"); // A = {"A", "B", "C"}
+
+boolean encontrado = A.stream().anyMatch(elemento -> elemento.equals("C")); 
+// Devuelve true si hay alguna coincidencia
+```
+***
+
+**Realizar una búsqueda con Api Stream (Filtrado/Collect)**
+
+```java
+List<String> subLista = lista.stream().filter(condición).collect(Collectors.toList());
+
+```
 
 ## HashMap
