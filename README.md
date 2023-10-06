@@ -122,4 +122,74 @@ A.add(7); // A = {1, 3, 5, 7}
 A.removeIf(element -> element > 5) // A = {1, 3}
 ```
 
+### e) Recorrer la Colección
+
+**Recorrer haciendo uso de un for**
+
+```java
+ArrayList<String> A = new ArrayList<>();
+A.add("A"); // A = {"A"}
+A.add("B"); // A = {"A", "B"}
+A.add("C"); // A = {"A", "B", "C"}
+A.add("D"); // A = {"A", "B", "C", "D"}
+
+for(int i = 0; i < A.size(); i++){
+    System.out.println(A.get(i));
+}
+```
+
+***
+
+**Recorrer haciendo uso de un foreach**
+
+```java
+ArrayList<String> A = new ArrayList<>();
+A.add("A"); // A = {"A"}
+A.add("B"); // A = {"A", "B"}
+A.add("C"); // A = {"A", "B", "C"}
+A.add("D"); // A = {"A", "B", "C", "D"}
+
+for(String s : A){
+    System.out.println(s);
+}
+```
+
+**Recorrer haciendo uso de Iterator**
+
+```java
+ArrayList<String> A = new ArrayList<>();
+A.add("A"); // A = {"A"}
+A.add("B"); // A = {"A", "B"}
+A.add("C"); // A = {"A", "B", "C"}
+
+Iterator<String> iteratorA = A.iterator(); // Creamos el iterador
+while (iteratorA.hasNext()) {
+    String elemento = iteratorA.next();
+    System.out.println(elemento);
+}
+```
+
+***
+
+**Recorrer haciendo uso de programacion funcional**
+
+```java
+ArrayList<String> A = new ArrayList<>();
+A.add("A"); // A = {"A"}
+A.add("B"); // A = {"A", "B"}
+A.add("C"); // A = {"A", "B", "C"}
+
+A.forEach(elemento -> {
+    System.out.println(elemento);
+});
+```
+
+> **Nota importante:** si se realiza alguna modificación sobre la lista o alguno de sus elementos mientras se recorre usando un _foreach_ o usando _Iterator_, se lanzará la una _**ConcurrentModificationException**_.
+
+### f) Búsqueda de Elementos
+
+**Realizar una búsqueda con un bucle (For/Foreach/Iterator)**
+
+```java```
+
 ## HashMap
