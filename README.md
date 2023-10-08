@@ -9,12 +9,15 @@
   - [1.5 Go through the collection ](#15-go-through-the-collection-)
   - [1.6 Search an element ](#16-search-an-element-)
   - [1.7 Order the elements ](#17-order-the-elements-)
-  - [1.9 Others aspects](#19-others-aspects)
+  - [1.8 Others aspects](#18-others-aspects)
 - [2. HashMap ](#2-hashmap-)
   - [2.1 Definition and creation a collection ](#21-definition-and-creation-a-collection-)
   - [2.2 Main methods and properties ](#22-main-methods-and-properties-)
-  - [1.3. Add data to the collection ](#13-add-data-to-the-collection--1)
+  - [2.3 Add data to the collection ](#23-add-data-to-the-collection-)
   - [2.4 Go through the collection ](#24-go-through-the-collection-)
+  - [2.5 Search an element ](#25-search-an-element-)
+  - [2.6 Order the elements ](#26-order-the-elements-)
+  - [2.7 Others aspects](#27-others-aspects)
   
 
 ## 1. ArrayList <a name="arraylist"></a>
@@ -307,7 +310,7 @@ List<String> B = A.stream().filter(element -> element.equals("A")).collect(Colle
 ```
 [Return to the index](#index)
  
-### 1.9 Others aspects<a name="arraylist-other"></a>
+### 1.8 Others aspects<a name="arraylist-other"></a>
 
 - **Generic uses:** ArrayList in Java use generics to ensure the type of the stored elements.
 - **Dynamic Capacity:** ArrayList adjust automatically its internal capacity if its needed.
@@ -376,7 +379,7 @@ Integer valor = hashMap.get(key); // valor = 2
 
 [Return to the index](#indice)
 
-### 1.3. Add data to the collection <a name="hashmap-add"></a>
+### 2.3 Add data to the collection <a name="hashmap-add"></a>
 
 **Add elements by the constructor**
 
@@ -430,7 +433,7 @@ map.remove("uno");
 
 ### 2.4 Go through the collection <a name="hashmap-travel"></a>
 
-**Using a for-each loop**
+**Using a for loop**
 ```java
 Map<String, Integer> hashMap = new HashMap<>();
 hashMap.put("uno", 1);
@@ -442,3 +445,167 @@ for (Map.Entry<String, Integer> entrada : hashMap.entrySet()) {
     Integer valor = entrada.getValue();
 }
 ```
+
+**Using function foreach and lambda expresions**
+```java
+Map<String, Integer> hasMap = new HashMap<>();
+hasMap.put("uno", 1);
+hasMap.put("dos", 2);
+hasMap.put("tres", 3);
+
+hasMap.forEach((clave, valor) -> {
+    System.out.println("Clave: " + clave + ", Valor: " + valor);
+});
+```
+
+**Using iterator**
+```java
+Map<String, Integer> hashMap = new HashMap<>();
+hashMap.put("uno", 1);
+hashMap.put("dos", 2);
+hashMap.put("tres", 3);
+
+Iterator<Map.Entry<String, Integer>> iterator = hashMap.entrySet().iterator();
+
+while (iterator.hasNext()) {
+    Map.Entry<String, Integer> entrada = iterator.next();
+    String clave = entrada.getKey();
+    int valor = entrada.getValue();
+}
+```
+
+[Return to the index](#indice)
+
+### 2.5 Search an element <a name="hashmap-find"></a>
+
+**Using a loop**
+```java
+Map<String, Integer> hashMap = new HashMap<>();
+hashMap.put("uno", 1);
+hashMap.put("dos", 2);
+hashMap.put("tres", 3);
+hashMap.put("cuatro", 4);
+hashMap.put("cinco", 5);
+
+String claveBuscada = "dos";
+int valorBuscado ;
+
+for (Map.Entry<String, Integer> entrada : hashMap.entrySet()) {
+    if (entrada.getKey().equals(claveBuscada)) {
+        valorBuscado = entrada.getValue();
+        break;
+    }
+}
+```
+
+**Using lambda expresions**
+```java
+Map<String, Integer> hashMap = new HashMap<>();
+hashMap.put("uno", 1);
+hashMap.put("dos", 2);
+hashMap.put("tres", 3);
+hashMap.put("cuatro", 4);
+hashMap.put("cinco", 5);
+
+String claveBuscada = "dos";
+int valorBuscado;
+
+hashMap.forEach((clave, valor) -> {
+    if (clave.equals(claveBuscada)) {
+        valorBuscado = valor;
+    }
+});
+```
+
+**Using API Stream**
+```java
+Map<String, Integer> hashMap = new HashMap<>();
+hashMap.put("uno", 1);
+hashMap.put("dos", 2);
+hashMap.put("tres", 3);
+hashMap.put("cuatro", 4);
+hashMap.put("cinco", 5);
+
+String claveBuscada = "dos";
+int valorBuscado = mapa.entrySet().stream()
+    .filter(entry -> entry.getKey().equals(claveBuscada))
+    .map(Map.Entry::getValue)
+    .findFirst();
+```
+
+[Return to the index](#indice)
+
+### 2.6 Order the elements <a name="hashmap-order"></a>
+
+**Using collection methods**
+```java
+Map<String, Integer> hashMap = new HashMap<>();
+hashMap.put("uno", 1);
+hashMap.put("cinco", 5);
+hashMap.put("tres", 3);
+hashMap.put("cuatro", 4);
+hashMap.put("dos", 2);
+
+List<String> claves = new ArrayList<>(hashMap.keySet());
+
+Collections.sort(claves);
+```
+
+**Using lambda expressions**
+```java
+Map<String, Integer> mapa = new HashMap<>();
+mapa.put("uno", 1);
+mapa.put("cinco", 5);
+mapa.put("tres", 3);
+mapa.put("cuatro", 4);
+mapa.put("dos", 2);
+
+Map<String, Integer> mapaOrdenadoPorValor = mapa.entrySet().stream()
+    .sorted(Map.Entry.comparingByValue())
+    .collect(
+        LinkedHashMap::new,
+        (mapaResultante, entrada) -> mapaResultante.put(entrada.getKey(), entrada.getValue()),
+        Map::putAll
+    );
+```
+
+**Using API Stream**
+```java
+Map<String, Integer> mapa = new HashMap<>();
+mapa.put("uno", 1);
+mapa.put("cinco", 5);
+mapa.put("tres", 3);
+mapa.put("cuatro", 4);
+mapa.put("dos", 2);
+
+Map<String, Integer> mapaOrdenadoPorValor = mapa.entrySet().stream()
+    .sorted(Map.Entry.comparingByValue())
+    .collect(
+        LinkedHashMap::new, 
+        (mapaResultante, entrada) -> mapaResultante.put(entrada.getKey(), entrada.getValue()),
+        Map::putAll
+    );
+```
+
+[Return to the index](#index)
+
+### 2.7 Others aspects<a name="hashmap-other"></a>
+
+**Key Features:**
+- HashMaps do not guarantee a specific order of elements. The sequence of elements may vary depending on the implementation and Java version.
+- Keys in a HashMap must be unique and non-null.
+- Values associated with keys can be null.
+- It is efficient for insertion, removal, and search operations, typically in constant time on average.
+
+**Performance:**
+- HashMap performance is generally constant for search, insert, and delete operations, as long as the hash function distributes keys uniformly.
+
+**Common Uses:**
+- HashMaps are widely used in Java applications for implementing dictionaries, caches, and efficient data storage.
+- They are ideal for looking up information based on a unique key, such as finding items by unique identifiers or tracking item frequencies.
+
+**Security Considerations:**
+- HashMaps are not synchronized, meaning they are not thread-safe without external synchronization.
+- For concurrent applications, it is recommended to use `ConcurrentHashMap` or manually synchronize to ensure thread safety.
+
+[Return to the index](#index)
