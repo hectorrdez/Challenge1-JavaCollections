@@ -1,24 +1,21 @@
 ## Index <a name="index"></a>
 
-1. [ArrayList](#arraylist)
-    
-    1.1 [Definition and creation a collection](#arraylist-def)
-
-    1.2 [Main methods and properties](#arraylist-metpropgen)
-
-    1.3 [Add data to the collection](#arraylist-add)
-
-    1.4 [Delete elements of the collection](#arraylist-del)
-    
-    1.5 [Going through the collection](#arraylist-travel)
-
-    1.6 [Find elements in the collection](#arraylist-find)
-
-    1.7 [Order the collection](#arraylist-order)
-    
-    1.8 [Other aspects](#arraylist-other)
-
-2. [HashMap](#hashmap)
+- [Index ](#index-)
+- [1. ArrayList ](#1-arraylist-)
+  - [1.1 Definition and creation a collection ](#11-definition-and-creation-a-collection-)
+  - [1.2 Main methods and properties ](#12-main-methods-and-properties-)
+  - [1.3. Add data to the collection ](#13-add-data-to-the-collection-)
+  - [1.4 Delete elements of the collection ](#14-delete-elements-of-the-collection-)
+  - [1.5 Go through the collection ](#15-go-through-the-collection-)
+  - [1.6 Search an element ](#16-search-an-element-)
+  - [1.7 Order the elements ](#17-order-the-elements-)
+  - [1.9 Others aspects](#19-others-aspects)
+- [2. HashMap ](#2-hashmap-)
+  - [2.1 Definition and creation a collection ](#21-definition-and-creation-a-collection-)
+  - [2.2 Main methods and properties ](#22-main-methods-and-properties-)
+  - [1.3. Add data to the collection ](#13-add-data-to-the-collection--1)
+  - [2.4 Go through the collection ](#24-go-through-the-collection-)
+  
 
 ## 1. ArrayList <a name="arraylist"></a>
 
@@ -320,4 +317,128 @@ List<String> B = A.stream().filter(element -> element.equals("A")).collect(Colle
 
 [Return to the index](#index)
 
-## HashMap <a name="hashmap"></a>
+## 2. HashMap <a name="hashmap"></a>
+
+[Return to the index](#indice)
+
+### 2.1 Definition and creation a collection <a name="hashmap-def"></a>
+
+HashMap is a data structure that implements the Map interface and is used to store key-value pairs. In a HashMap, each element (or entry) consists of two parts: a unique key and an associated value. This allows efficient retrieval of a specific value based on its corresponding key.
+
+**Useful Contructors**
+```java
+// Void constructor
+HashMap<K, V> hashMap = new HashMap<>();
+
+// Contructor with initial capacity
+HashMap<K, V> hashMap = new HashMap<>(initialCapacity);
+
+// Constructor Builder with initial capacity and load factor
+HashMap<K, V> hashMap = new HashMap<>(capacidadInicial, factorCarga);
+
+// Constructor from another collection
+Map<K, V> otherMap = getAnotherMap();
+HashMap<K, V> hashMap = new HashMap<>(otherMap);
+```
+
+[Return to the index](#indice)
+
+### 2.2 Main methods and properties <a name="hashmap-metpropgen"></a>
+
+**Size**
+
+size() is used to get the number of key-value pairs in the map. Returns an integer that represents the number of items contained in the HashMap. In other words, it tells you how many items are stored on the map at any given time.
+
+```java
+HashMap<String, Integer> hasMap = new HashMap<>();
+
+hasMap.put("uno", 1);
+hasMap.put("dos", 2);
+hasMap.put("tres", 3);
+
+int size = hasMap.size(); // size = 3
+```
+
+**Access by index/key**
+
+To access a value in a Java HashMap by a key, you can use the method get(). This method receives as an argument the key you want to search for in the map and returns the value associated with that key or null if the key is not present in the map.
+
+```java
+HashMap<String, Integer> hashMap = new HashMap<>();
+
+hashMap.put("uno", 1);
+hashMap.put("dos", 2);
+hashMap.put("tres", 3);
+
+String key = "dos";
+Integer valor = hashMap.get(key); // valor = 2
+```
+
+[Return to the index](#indice)
+
+### 1.3. Add data to the collection <a name="hashmap-add"></a>
+
+**Add elements by the constructor**
+
+A HashMap in Java does not allow you to add elements directly from the constructor using an inline initialization syntax as in some other programming languages. You must add elements to the HashMap after creating it using the put() method or other insert methods.
+
+Here there is an example of a similar syntax:
+
+```java
+ Map<String, Integer> map = new HashMap<String, Integer>() {
+    {
+        put("uno", 1);
+        put("dos", 2);
+        put("tres", 3);
+    }
+};
+```
+
+**Add elements using other collections**
+```java
+Map<String, Integer> initialMap = new HashMap<>();
+
+initialMap.put("uno", 1);
+initialMap.put("dos", 2);
+initialMap.put("tres", 3);
+
+Map<String, Integer> nuevoMap = new HashMap<>(initialMap);
+```
+
+**Add elements by code**
+```java
+Map<String, Integer> map = new HashMap<>();
+
+map.put("uno", 1);
+map.put("dos", 2);
+map.put("tres", 3);
+```
+
+**Delete elements by code**
+```java
+Map<String, Integer> map = new HashMap<>();
+
+map.put("uno", 1);
+map.put("dos", 2);
+map.put("tres", 3);
+
+map.remove("uno");
+```
+
+[Return to the index](#indice)
+
+
+### 2.4 Go through the collection <a name="hashmap-travel"></a>
+
+**Using a for-each loop**
+```java
+Map<String, Integer> hashMap = new HashMap<>();
+hashMap.put("uno", 1);
+hashMap.put("dos", 2);
+hashMap.put("tres", 3);
+
+for (Map.Entry<String, Integer> entrada : hashMap.entrySet()) {
+    String clave = entrada.getKey();
+    Integer valor = entrada.getValue();
+}
+```
